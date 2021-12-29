@@ -4,29 +4,33 @@
 @section('index')
 
 <div class="row justify-content-center mt-5 rounded" style="border: 3px solid black">
-    <div class="col-md-8">
+    <div class="col-md-8 col-md-p5">
         <table class="table table-dark">
             <table class="table bordered">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Image</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                      @foreach ($students as $student)
+                      <tr>
+                        <th>{{ $student->id }}</th>
+                        <td>{{ $student->name }}</td>
+                        <td>{{ $student->course }}</td>
+                        <td> <img src="{{ asset('uploads/students_images/' . $student->img_name) }}" width="40px"> </td>
+                      </tr>
+                      @endforeach
+
                 </tbody>
               </table>
         </table>
     </div>
     <div class="col-md-4 text-center">
-        <a class="btn btn-success mt-3" href="{{ url('add-student') }}">Add Student</a>
+        <a class="btn btn-success m-3 " href="{{ url('add-student') }}">Add Student</a>
     </div>
 </div>
 @endsection
