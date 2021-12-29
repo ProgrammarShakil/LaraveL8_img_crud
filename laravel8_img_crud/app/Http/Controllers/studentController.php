@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class studentController extends Controller
 {
@@ -40,7 +41,7 @@ class studentController extends Controller
         $student->name = $request->name;
         $student->course = $request->course;
 
-        if ($request->hasFile('profile_img_path')) {  // if isset or get image
+        if ($request->hasfile('profile_img_path')) {  // if isset or get image
             $file = $request->file('profile_img_path');   // get image 
             $extension = $file->getClientOriginalExtension();  // get image extension
             $fileName = time(). '.' . $extension;  // get file name
@@ -83,7 +84,24 @@ class studentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id);
+        $student->name = $request->name;
+        $student->course = $request->course;
+
+        if ($request->hasfile('profile_img_path')) {  // if isset or get image
+            $destination = 'uploads/students_images/'. $student->img_name; // get destination 
+
+            if (File::exists( $destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file('profile_img_path');   // get image 
+            $extension = $file->getClientOriginalExtension();  // get image extension
+            $fileName = time(). '.' . $extension;  // get file name
+            $file->move('uploads/students_images', $fileName);  // configuring where image upload
+            $student->img_name = $fileName;
+        }
+        $student->update();
+        return redirect()->back()->with('Status', 'Student Updated Successfully.');
     }
 
     /**

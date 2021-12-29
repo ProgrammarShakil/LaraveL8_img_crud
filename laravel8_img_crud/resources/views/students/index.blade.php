@@ -21,7 +21,7 @@
                         <th>{{ $student->id }}</th>
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->course }}</td>
-                        <td> <img src="{{ asset('uploads/students_images/' . $student->img_name) }}" width="40px"> </td>
+                        <td> <img src="{{ asset('uploads/students_images/' . $student->img_name) }}" width="50px" height="50px"> </td>
                         <td><a href="{{ url('edit-student/' . $student->id) }}"><i class="fas fa-edit ms-1 me-3 "></i></a> |  
                             <a href="{{ url('delete-student/' . $student->id) }}"><i class="fas fa-trash ms-3"></i></a>
                         </td>

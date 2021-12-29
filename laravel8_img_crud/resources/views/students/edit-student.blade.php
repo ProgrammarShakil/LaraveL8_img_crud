@@ -15,9 +15,10 @@
      </div>
      
     <div class="col-md-9">
-        <form action="{{ url('add-student') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('update-student/' . $students->id) }}" method="POST" enctype="multipart/form-data">
 
             @csrf
+            @method('PUT')
 
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Name</label>
