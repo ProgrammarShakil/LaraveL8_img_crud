@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class studentController extends Controller
@@ -34,7 +35,19 @@ class studentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = new Student();
+        $student->name = $request->name;
+        $student->course = $request->course;
+
+        if ($request->hasFile('profile_img_path')) {  // if isset or get image
+            $file = $request->file('profile_img_path');   // get image 
+            $extension = $file->getClientOriginalExtension();  // get image extension
+            $fileName = time(). '.' . $extension;  // get file name
+            $file->move('uploads/students_images', $fileName);  // configuring where image upload
+            $student->img_name = $fileName;
+        }
+        $student->save();
+        return redirect()->back()->with('Status', 'Student Added Successfully.');
     }
 
     /**
