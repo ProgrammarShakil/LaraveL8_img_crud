@@ -70,8 +70,9 @@ class studentController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        $students = Student::find($id);
+        return view('students.edit-student',[ 'students' => $students ]);
+   }
 
     /**
      * Update the specified resource in storage.
