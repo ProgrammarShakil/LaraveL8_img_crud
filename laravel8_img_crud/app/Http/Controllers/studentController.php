@@ -112,6 +112,13 @@ class studentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+
+        $destination = 'uploads/students_images/'. $student->img_name; // get destination 
+        if (File::exists( $destination)) {
+            File::delete($destination);
+        }
+        $student->delete();
+        return redirect()->back()->with('Status', 'Student Deleted Successfully.');
     }
 }

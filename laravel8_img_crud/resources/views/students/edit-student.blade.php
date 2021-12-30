@@ -8,7 +8,7 @@
 <div class="row justify-content-center mt-5 p-3 rounded" style="border: 3px solid black">
     <div>
         @if (session('Status'))
-        <div class="alert alert-success">
+        <div class="alert alert-success mt-2">
             {{ session('Status') }}
         </div>
         @endif

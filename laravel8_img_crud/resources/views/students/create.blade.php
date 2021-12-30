@@ -8,7 +8,7 @@
 <div class="row justify-content-center mt-5 p-3 rounded" style="border: 3px solid black">
     <div>
         @if (session('Status'))
-        <div class="alert alert-success">
+        <div class="alert alert-success mt-2">
             {{ session('Status') }}
         </div>
         @endif
@@ -34,7 +34,7 @@
                 <input type="file" class="form-control" name="profile_img_path" id="exampleInputPassword1">
             </div>
         
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Add Student</button>
         
           </form>
     </div>

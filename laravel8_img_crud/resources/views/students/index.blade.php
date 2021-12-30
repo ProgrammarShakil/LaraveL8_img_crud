@@ -4,6 +4,13 @@
 @section('index')
 
 <div class="row justify-content-center mt-5 rounded" style="border: 3px solid black">
+    <div>
+        @if (session('Status'))
+        <div class="alert alert-success mt-3">
+            {{ session('Status') }}
+        </div>
+        @endif
+     </div>
     <div class="col-md-8 ">
             <table class="table bordered">
                 <thead>
@@ -12,7 +19,8 @@
                     <th scope="col">Name</th>
                     <th scope="col">Course</th>
                     <th scope="col">Image</th> 
-                    <th scope="col"> Edit | Delete</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -21,9 +29,17 @@
                         <th>{{ $student->id }}</th>
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->course }}</td>
-                        <td> <img src="{{ asset('uploads/students_images/' . $student->img_name) }}" width="50px" height="50px"> </td>
-                        <td><a href="{{ url('edit-student/' . $student->id) }}"><i class="fas fa-edit ms-1 me-3 "></i></a> |  
-                            <a href="{{ url('delete-student/' . $student->id) }}"><i class="fas fa-trash ms-3"></i></a>
+                        <td> <img src="{{ asset('uploads/students_images/' . $student->img_name) }}" width="50px"> </td>
+                        <td class="">
+                            <a class="btn btn-success btn-sm" href="{{ url('edit-student/' . $student->id) }}"><i class="fas fa-edit"></i></a> 
+                        </td>
+                        <td class="ps-3">
+                            {{-- <a href="{{ url('delete-student/' . $student->id) }}"><i class="fas fa-trash"></i></a> --}}
+                            <form action="{{ url('delete-student/' . $student->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                            </form>
                         </td>
                       </tr>
                       @endforeach
